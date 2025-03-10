@@ -1,0 +1,389 @@
+<html doctype="html">
+  <head>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
+ 
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      /* background-color: rgb(121, 135, 255); */
+    }
+
+    .main {
+      padding: 10px;
+      width: 100%;
+      position: relative;
+      font-family: "Poppins", sans-serif;
+    }
+
+    #input-search {
+      display: flex;
+      justify-content: center;
+
+    }
+
+    #home {
+      width: 100%;
+      /* margin: 0 auto; */
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #mainLink {
+      text-decoration: none;
+      background-color: transhome;
+      color: #000;
+      display: inline-block;
+      padding: 0;
+      margin: 0;
+    }
+
+    #mainLink:hover {
+      color: #000;
+    }
+
+    .child {
+      flex-shrink: 0;
+      /* color: #fff; */
+      width: 31%;
+      height: fit-content;
+      /* background-color: rgb(26, 26, 27); */
+      padding: 18px;
+      border-radius: 8px;
+      position: relative;
+      box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%);
+      transition: all 0.3s ease;
+    }
+    .child:hover{
+        box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 2px 6px 2px rgb(60 64 67 / 15%);
+    }
+
+    .actionbtn {
+      margin-top: 3px;
+      padding: 0;
+    }
+
+    .actionbtn a {
+      margin: 4px 0;
+      font-size: 13px;
+      display: inline-block;
+      background-color: rgba(64, 64, 64, 0.837);
+      color: rgb(230, 230, 230);
+      padding: 5px 8px;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .actionbtn a:hover {
+      color: #fff;
+      background-color: rgba(14, 13, 13, 0.811);
+    }
+
+    .show-price {
+      display: flex;
+      justify-content: flex-start;
+      align-items: start;
+      gap: 10px;
+    }
+
+    .show-price>span:nth-child(1) {
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    .show-price>span:nth-child(2) {
+      display: flex;
+      gap: 10px;
+      font-size: 14px;
+    }
+
+    .show-price>span:nth-child(2) span:nth-of-type(1) {
+      text-decoration: line-through;
+      opacity: 0.8;
+    }
+
+    .show-price>span:nth-child(2) span:nth-of-type(2) {
+      color: rgb(0, 159, 0);
+      font-weight: 600;
+
+    }
+
+    .hr-line {
+      width: 27%;
+      opacity: 0.2;
+    }
+
+    .content {
+      display: flex;
+      gap: 10px;
+      font-size: 14px;
+    }
+
+    .content .content1 i {
+      color: rgb(255, 68, 68);
+      font-size: 14px;
+    }
+
+    .likes {
+      font-size: 15px;
+    }
+
+    .likes i {
+      color: rgb(255, 68, 68);
+    }
+
+    .content .content1>span:nth-of-type(1) {
+      font-weight: 500;
+    }
+
+    .course-category span:nth-of-type(1) {
+      font-weight: 500;
+      font-size: 15px;
+    }
+
+    .course-category span:nth-of-type(2) {
+      font-size: 14px;
+    }
+
+    .child img {
+      width: 100%;
+      height: 100%;
+      border-radius: 5px;
+      margin-bottom: 5px;
+    }
+
+    .child h1 {
+      font-size: 16px;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      color: rgb(83, 81, 81);
+      font-weight: 500;
+      line-height: 1.3;
+
+    }
+
+    #search {
+      width: 40%;
+      padding: 10px 15px;
+      border: 1px solid rgb(0, 0, 0);
+      border-radius: 15px;
+      /* border: none; */
+      outline: none;
+      background-color: rgb(255, 255, 255);
+      color: rgb(0, 0, 0);
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+
+    @media screen and (max-width: 1200px) {
+      .child {
+        width: 45%;
+      }
+
+      .child h1 {
+        font-size: 16px;
+      }
+
+      #home {
+        gap: 10px;
+      }
+
+      .content {
+        gap: 7px;
+      }
+    }
+
+    @media screen and (max-width: 767px) {
+      .child {
+        flex-shrink: 1;
+        width: 100%;
+      }
+
+      .child h1 {
+        font-size: 16px;
+        line-height: 20px;
+        padding-bottom: 5px;
+      }
+
+      #search {
+        width: 80%;
+      }
+
+      .likes {
+        display: none;
+      }
+
+      .course-category {
+        display: none;
+      }
+
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="main">
+    <!-- <div id="input-search">
+      <input type="text" id="search" placeholder="Search your Course...">
+    </div> -->
+    <!-- <button>Get Random User</button> -->
+    <div id="home">
+      <!-- <a id= "mainLink" href="#">
+                <div class="child">
+                <div><img src="https://courses-assets-v2.classplus.co/_next/image?url=/api/proxyimage?url=https%3A%2F%2Fcdn-wl-assets.classplus.co%2Fproduction%2Fsingle%2Fead%2Faeb022d5-6146-49cf-bcd9-56fbc3f4ed85.jpg&w=256&q=75" alt=""></div>
+                <h1>Smart Course for UKPSC Polytechnic Lecturer(Electrical Engineering)</h1>
+                <div class="show-price">
+                    <span>&#8377; 500/-</span>
+                    <span>
+                        <span> 2000 </span>
+                        <span> 20% OFF </span>
+                    </span>
+                </div>               
+                <hr class="hr-line">
+                 <div class="content">
+                    <div class="content1">
+                        <i class="ri-movie-line"></i>
+                        <span>Videos : </span>
+                        <span>220</span>
+                    </div>
+                    <div class="content1">
+                        <i class="ri-file-pdf-2-line"></i>
+                        <span>Pdfs : </span>
+                        <span>220</span>
+                    </div>
+                    <div class="content1">
+                        <i class="ri-a-b"></i>
+                        <span>Tests : </span>
+                        <span>220</span>
+                    </div>
+                </div>
+                <div class="likes">
+                    <span> Likes : </span>
+                    <span> 100 </span>
+                   <i class="ri-thumb-up-line"></i>
+                </div>
+                <div class="course-category">
+                    <span>Categories : </span>
+                    <span>Electrical Engineering</span>
+                </div>
+                <div class="actionbtn">
+                    <a href="${element.singlePaymentLink}">View More</a>
+                </div>
+                
+                </div>
+             </a> -->
+    </div>
+
+  </div>
+
+  <script>
+    const container = document.querySelector('#home');
+     const url2 = "https://api.classplusapp.com/v2/course/preview/similar/eyJvcmdJZCI6MTI4Nn0=?tabCategoryId=1&limit=50&offset=0&requiredFilters=[1]"  
+
+    let allCourses;     
+   async function getCourses() {
+        try {
+            const url = "https://api.classplusapp.com/v2/course/preview/similar/eyJvcmdJZCI6MTI4Nn0=?tabCategoryId=1&limit=50&offset=0&requiredFilters=[1]"  
+
+            let rdata = await fetch(url);   
+            const data = await rdata.json();            
+        
+            allCourses = data.data.coursesData;
+            allCourses.sort((a, b) => b.createdAt - a.createdAt);  
+            const courses = allCourses.filter((er) => er.isFeatured == true);      
+            addCourse(courses);
+
+        } catch (error) {
+            console.log("ERROR : ", error);            
+        }
+            
+    }
+
+ fetch(url2)
+    .then((response) => response.json())
+    .then((data) => {
+        allCourses = data.data.coursesData;
+        allCourses.sort((a, b) => b.createdAt - a.createdAt);  
+        const courses = allCourses.filter((er) => er.isFeatured == true);      
+        addCourse(courses);
+        console.log(courses)
+    })
+    .catch((error) => {
+    console.log("ERROR : ", error);            
+    });
+
+
+    const addCourse = (element) => {
+          element.forEach((element) => {           
+                
+         container.innerHTML += `
+                <a id= "mainLink" href="${element.singlePaymentLink}" target="_blank">
+                <div class="child">
+                <div><img src="${element.imageUrl}" alt=""></div>
+                <h1>${element.name}</h1>
+                <div class="show-price">
+                    <span>&#8377; ${element.finalPrice}/-</span>
+                    <span>
+                        <span> ${element.price} </span>
+                        <span> ${(((element.price - element.finalPrice) / element.price) * 100) > 0 ? `${(((element.price - element.finalPrice) / element.price) * 100).toFixed(0)}% OFF` : " "} </span>
+                    </span>
+                </div>               
+                <hr class="hr-line">
+                 <div class="content">
+                    ${element.likes.value != 0 ?
+            `<div class="content1">                                
+                                <i class="ri-thumb-up-line"></i>
+                                <span>Likes : </span>
+                                <span>${element.likes.value}</span>
+                            </div>` : ""
+          }
+                    ${element.resources.files > 0 ?
+            `<div class="content1">
+                            <i class="ri-file-pdf-2-line"></i>
+                            <span>Pdfs : </span>
+                            <span>${element.resources.files}</span>
+                    </div>` : ""}
+                    ${element.resources.tests > 0 ?
+            `<div class="content1">
+                                <i class="ri-a-b"></i>
+                                <span>Tests : </span>
+                                <span>${element.resources.tests}</span>
+                            </div>` : ""
+          }
+                </div>
+                <div class="likes">
+                
+                <div class="course-category">
+                    <span>Categories : </span>
+                    <span>${element.categories}</span>
+                </div>
+                <div class="actionbtn">
+                    <a href="${element.singlePaymentLink}" target="_blank">Free Classes </a>
+                </div>
+                
+                </div>
+             </a>
+        `
+              
+     })   
+    }
+
+    (function () {
+        getCourses();
+    })();
+
+  </script>
+</body>
+
