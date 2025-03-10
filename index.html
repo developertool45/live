@@ -386,16 +386,12 @@
     const url = `https://api.classplusapp.com/v2/course/preview/similar/eyJvcmdJZCI6MTI4Nn0=?tabCategoryId=1&limit=50&offset=0&requiredFilters=[1]`; // API URL
 
     toggle.checked = false;
-
+    
     check.addEventListener("click", (e) => {
       toggle.checked = e.target.checked;
       let toggleChecked = toggle.checked;
-
-      if (toggle.checked) {
-        toggleCourses(toggleChecked);
-      } else {
-        toggleCourses(toggleChecked);
-      }
+      toggle.checked ? toggleCourses(toggleChecked) : toggleCourses(toggleChecked);
+      
       // function toggleCourses( all, allFeatured) { 
       //     // getCourses();
       //     if (toggle.checked) {  
@@ -437,11 +433,7 @@
           const allFeaturedCourses = allCourses
             .filter((er) => er.isFeatured == true);
 
-          if (toggleChecked) {
-            addCourse(allCourses);
-          } else {
-            addCourse(allFeaturedCourses);
-          }
+          toggleChecked ? addCourse(allCourses) : addCourse(allFeaturedCourses);          
         })
         .catch((error) => {
           console.log("ERROR : ", error);
@@ -503,7 +495,7 @@
       })
     }
   (function () {
-      toggleCourses();
+     toggle.checked ? toggleCourses(true) : toggleCourses(false);
     })();       
   </script>
 </body>
