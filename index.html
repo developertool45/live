@@ -1,7 +1,8 @@
 <html doctype="html">
-  <head>
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
- 
+
+<head>
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
+
   <style>
     * {
       margin: 0;
@@ -64,8 +65,9 @@
       box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%);
       transition: all 0.3s ease;
     }
-    .child:hover{
-        box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 2px 6px 2px rgb(60 64 67 / 15%);
+
+    .child:hover {
+      box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 2px 6px 2px rgb(60 64 67 / 15%);
     }
 
     .actionbtn {
@@ -186,6 +188,82 @@
       font-size: 14px;
     }
 
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 34px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 26px;
+      width: 26px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+
+    input:checked+.slider {
+      background-color: #2196F3;
+    }
+
+    input:focus+.slider {
+      box-shadow: 0 0 1px #2196F3;
+    }
+
+    input:checked+.slider:before {
+      -webkit-transform: translateX(26px);
+      -ms-transform: translateX(26px);
+      transform: translateX(26px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+      border-radius: 34px;
+    }
+
+    .slider.round:before {
+      border-radius: 50%;
+    }
+
+    .toogle-button {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 20px 50px;
+      gap: 10px;
+    }
+
+    .toogle-text {
+      color: rgb(255, 255, 255);
+      background-color: #043486;
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-weight: 500;
+    }
+
     @media screen and (max-width: 1200px) {
       .child {
         width: 45%;
@@ -235,6 +313,19 @@
 <body>
 
   <div class="main">
+
+    <!-- <div>
+      <label for="check"> All Courses</label>
+       <input type="checkbox" name="check" id="check" >
+    </div> -->
+    <div class="toogle-button">
+      
+      <label class="switch">
+        <input type="checkbox" id="check">
+        <span class="slider round"></span>
+      </label>
+      <span class="toogle-text">All Courses</span>
+    </div>
     <!-- <div id="input-search">
       <input type="text" id="search" placeholder="Search your Course...">
     </div> -->
@@ -289,46 +380,77 @@
   </div>
 
   <script>
+    const toggle = document.querySelector("#check");
     const container = document.querySelector('#home');
-     const url2 = "https://api.classplusapp.com/v2/course/preview/similar/eyJvcmdJZCI6MTI4Nn0=?tabCategoryId=1&limit=50&offset=0&requiredFilters=[1]"  
+    const url = `https://api.classplusapp.com/v2/course/preview/similar/eyJvcmdJZCI6MTI4Nn0=?tabCategoryId=1&limit=50&offset=0&requiredFilters=[1]`; // API URL
 
-    let allCourses;     
-   async function getCourses() {
-        try {
-            const url = "https://api.classplusapp.com/v2/course/preview/similar/eyJvcmdJZCI6MTI4Nn0=?tabCategoryId=1&limit=50&offset=0&requiredFilters=[1]"  
+    toggle.checked = false;
 
-            let rdata = await fetch(url);   
-            const data = await rdata.json();            
-        
-            allCourses = data.data.coursesData;
-            allCourses.sort((a, b) => b.createdAt - a.createdAt);  
-            const courses = allCourses.filter((er) => er.isFeatured == true);      
-            addCourse(courses);
+    check.addEventListener("click", (e) => {
+      toggle.checked = e.target.checked;
+      let toggleChecked = toggle.checked;
 
-        } catch (error) {
-            console.log("ERROR : ", error);            
-        }
-            
-    }
+      if (toggle.checked) {
+        toggleCourses(toggleChecked);
+      } else {
+        toggleCourses(toggleChecked);
+      }
+      // function toggleCourses( all, allFeatured) { 
+      //     // getCourses();
+      //     if (toggle.checked) {  
+      //         getCourses();         
+      //         // console.log(all);
+      //         console.log( "checked", toggle.checked);
+      //         // addCourse(all);
+      //       } else {
+      //         // addCourse(allFeatured);
+      //         // console.log(allFeatured);
+      //         console.log("unchecked",toggle.checked);
+      //     }
+      // }
 
- fetch(url2)
-    .then((response) => response.json())
-    .then((data) => {
-        allCourses = data.data.coursesData;
-        allCourses.sort((a, b) => b.createdAt - a.createdAt);  
-        const courses = allCourses.filter((er) => er.isFeatured == true);      
-        addCourse(courses);
-        console.log(courses)
-    })
-    .catch((error) => {
-    console.log("ERROR : ", error);            
     });
 
+    async function getCourses(toggleChecked) {
+      try {
+        const url = "https://api.classplusapp.com/v2/course/preview/similar/eyJvcmdJZCI6MTI4Nn0=?tabCategoryId=1&limit=50&offset=0&requiredFilters=[1]"
+        let data = await fetch(url);
+        data = await data.json();
+        let data1 = await (await fetch(url)).json();
+        allCourses = data.data.coursesData;
+        allCourses.sort((a, b) => b.createdAt - a.createdAt);
+        const courses = allCourses.filter((er) => er.isFeatured == true);
+        // addCourse(courses);
+      } catch (error) {
+        console.log("ERROR : ", error);
+      }
+    }
+
+    function toggleCourses(toggleChecked) {
+      fetch(url)
+        .then((response) => response.json())
+        .then((data) => {
+          const allCourses = data.data.coursesData
+            .sort((a, b) => b.createdAt - a.createdAt);
+
+          const allFeaturedCourses = allCourses
+            .filter((er) => er.isFeatured == true);
+
+          if (toggleChecked) {
+            addCourse(allCourses);
+          } else {
+            addCourse(allFeaturedCourses);
+          }
+        })
+        .catch((error) => {
+          console.log("ERROR : ", error);
+        });
+    }
 
     const addCourse = (element) => {
-          element.forEach((element) => {           
-                
-         container.innerHTML += `
+      container.innerHTML = '';
+      element.forEach((element) => {
+        container.innerHTML += `
                 <a id= "mainLink" href="${element.singlePaymentLink}" target="_blank">
                 <div class="child">
                 <div><img src="${element.imageUrl}" alt=""></div>
@@ -376,14 +498,12 @@
                 </div>
              </a>
         `
-              
-     })   
+
+      })
     }
 
     (function () {
-        getCourses();
-    })();
-
+      toggleCourses(false);
+    })();    
   </script>
 </body>
-
